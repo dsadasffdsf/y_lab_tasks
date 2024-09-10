@@ -55,7 +55,10 @@ class Store {
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, { code: this.state.listLength, title: 'Новая запись' }],
+      list: [
+        ...this.state.list,
+        { code: this.state.listLength, title: 'Новая запись', selection: 0, selected: false },
+      ],
       listLength: this.state.listLength + 1,
     });
     // console.log(Store.getState().listLength);

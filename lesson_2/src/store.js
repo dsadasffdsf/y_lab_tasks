@@ -3,15 +3,19 @@
  */
 class Store {
   constructor(initState = {}) {
+    let uniqueСode = 0;
     const updatedList = [
       ...initState.list.map(item => {
+        if (item.code > uniqueСode) {
+          uniqueСode = item.code;
+        }
         return { ...item, selection: 0, selected: false };
       }),
     ];
 
     this.state = {
       list: [...updatedList],
-      listLength: initState.list.length + 1,
+      uniqueСode: uniqueСode+1,
     };
     this.listeners = []; // Слушатели изменений состояния
   }
@@ -57,12 +61,11 @@ class Store {
       ...this.state,
       list: [
         ...this.state.list,
-        { code: this.state.listLength, title: 'Новая запись', selection: 0, selected: false },
+        { code: this.state.uniqueСode, title: 'Новая запись', selection: 0, selected: false },
       ],
-      listLength: this.state.listLength + 1,
+      uniqueСode: this.state.uniqueСode + 1,
     });
-    // console.log(Store.getState().listLength);
-    console.log(this.state.listLength);
+
   }
 
   /**
